@@ -8,7 +8,7 @@ Why this project: pure Python, no external services, small and well-defined publ
 deterministic outputs -> ideal for unit testing with ECP/BVA.
 
 ## Prerequisites
-- Python 3.10+ (tested with 3.13)
+- Python 3.11+ (tested with 3.13)
 - git
 
 ## Steps
@@ -42,6 +42,12 @@ python -c "import humanize; print(humanize.naturalsize(3000000), humanize.ordina
 |---|---|---|
 | `ModuleNotFoundError: No module named 'freezegun'` while collecting `test_time.py` | upstream test dependency not in runtime deps | `pip install freezegun` (already in requirements.txt) |
 | `fixture 'benchmark' not found` in `test_benchmarks.py` | missing plugin | `pip install pytest-benchmark` (already in requirements.txt) |
+
+## Local change to the vendored upstream project
+Upstream computes its version from git tags (`hatch-vcs`), which does not work in a
+snapshot without upstream's git history (`pip install` fails while generating metadata).
+We therefore pinned a static version: `humanize/pyproject.toml` (`version = "0.0.0"`, vcs hook
+removed) and added `humanize/src/humanize/_version.py`. No library behaviour was changed.
 
 ## Setup video
 Recording is in `docs/setup_video.mp4` (see `docs/setup_video_script.md` for the exact
