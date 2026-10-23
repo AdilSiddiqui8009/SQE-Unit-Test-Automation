@@ -1,0 +1,11 @@
+# System under test (editable install of the vendored humanize project)
+-e ./humanize
+
+# Test tooling
+pytest>=8
+pytest-xdist>=3        # parallel execution (-n)
+pytest-order>=1.2      # execution order of groups/tests
+pytest-html>=4         # HTML report
+pytest-benchmark       # needed by upstream tests/test_benchmarks.py
+freezegun              # needed by upstream tests/test_time.py
+openpyxl>=3            # Excel test-case sheet generation / reading
