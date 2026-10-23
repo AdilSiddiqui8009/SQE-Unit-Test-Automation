@@ -54,6 +54,24 @@ Details: [SETUP.md](SETUP.md).
 
 Markers can be combined: `pytest -m "boundary and lists"`, `pytest -m "m2 and not negative"`.
 
+### Common Verification Commands
+```powershell
+# 1. Run Member 2 (Ibadat Ali) complete test suite (74 tests: 73 passed, 1 xfail):
+python run_tests.py m2
+
+# 2. Run Member 2 external data-driven tests (25 automated test cases):
+pytest tests_assignment/test_data_driven_m2.py -v
+
+# 3. Run Member 2 lists module suite:
+python run_tests.py lists
+
+# 4. Run parallel execution across all 4 module suites (one worker per module):
+python run_tests.py parallel-modules
+
+# 5. Run the entire repository regression suite (383 test cases: 381 passed, 2 xfailed):
+python run_tests.py regression
+```
+
 ### Groups
 `smoke`, `ecp`, `boundary`, `negative`, `datadriven`, `module_level` (by technique/level)
 and `number`, `filesize`, `time`, `lists`, `m2` (by module / author).
