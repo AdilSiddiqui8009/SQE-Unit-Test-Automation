@@ -3,6 +3,4 @@ __pycache__/
 *.pyc
 .pytest_cache/
 .benchmarks/
-reports/*.html
-reports/assets/
 *.egg-info/
