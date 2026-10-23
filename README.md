@@ -56,7 +56,7 @@ Markers can be combined: `pytest -m "boundary and lists"`, `pytest -m "m2 and no
 
 ### Common Verification Commands
 ```powershell
-# 1. Run Member 2 (Ibadat Ali) complete test suite (74 tests: 73 passed, 1 xfail):
+# 1. Run Member 2 (Ibadat Ali) complete test suite (87 tests: 86 passed, 1 xfail):
 python run_tests.py m2
 
 # 2. Run Member 2 external data-driven tests (25 automated test cases):
@@ -68,7 +68,7 @@ python run_tests.py lists
 # 4. Run parallel execution across all 4 module suites (one worker per module):
 python run_tests.py parallel-modules
 
-# 5. Run the entire repository regression suite (383 test cases: 381 passed, 2 xfailed):
+# 5. Run the entire repository regression suite (396 test cases: 394 passed, 2 xfailed):
 python run_tests.py regression
 ```
 

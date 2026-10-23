@@ -18,17 +18,17 @@
 ---
 
 ## 2. Test Execution Numbers (Final Regression Run: `pytest`)
-- **Total test cases collected:** **383 test cases**
-- **Test results:** **381 passed, 2 expected failures (`xfail`), 0 failed, 0 errors.**
+- **Total test cases collected:** **396 test cases**
+- **Test results:** **394 passed, 2 expected failures (`xfail`), 0 failed, 0 errors.**
 - **Member breakdown:**
   * **Member 1 (Adil Siddiqui):** 309 cases (243 unit + 66 CSV data-driven) $\rightarrow$ 308 passed, 1 `xfail`.
-  * **Member 2 (Ibadat Ali):** 74 cases (49 unit + 25 CSV data-driven) $\rightarrow$ 73 passed, 1 `xfail`.
+  * **Member 2 (Ibadat Ali):** 87 cases (62 unit + 25 CSV data-driven) $\rightarrow$ 86 passed, 1 `xfail`.
 - **Functions tested per person (Assignment asks 5–10 tests per function):**
   * *Member 1:* `ordinal` (10), `intcomma` (9), `apnumber` (9), `naturalsize` (10), `naturaldelta` (10), `naturalday` (7), `precisedelta` (9).
-  * *Member 2:* `natural_list` (7), `clamp` (11), `intword` (9), `naturaldate` (8).
+  * *Member 2:* `natural_list` (6 functions written $\rightarrow$ 9 runs), `clamp` (6 functions written $\rightarrow$ 11 runs), `intword` (6 functions written $\rightarrow$ 11 runs), `naturaldate` (6 functions written $\rightarrow$ 10 runs). Every class contains 5–6 functions with single scenarios placed first and parametrized data tables placed at the end.
 - **Module-level contract tests:**
   * *Member 1:* 8 tests each for `number`, `filesize`, `time`.
-  * *Member 2:* 5 tests each for `lists`, `number` extended, `time` extended.
+  * *Member 2:* 5 tests each for `lists` (8 runs), `number` extended (6 runs), `time` extended (7 runs).
 - **Upstream regression:** Upstream `humanize` test suite executes cleanly in the local environment (744 passed).
 
 ---
@@ -79,7 +79,7 @@ All boundaries, equivalence partitions, and rationale are documented in [`docs/t
 From the repository root with virtual environment activated:
 
 ```powershell
-# 1. Run Member 2 (Ibadat Ali) test suite (74 tests: 73 passed, 1 xfail):
+# 1. Run Member 2 (Ibadat Ali) test suite (87 tests: 86 passed, 1 xfail):
 python run_tests.py m2
 
 # 2. Run Member 2 lists module suite:
@@ -108,6 +108,6 @@ Generated reports are stored in `reports/`:
 | Member | Allocated Modules | Individual Deliverables & Evidence |
 |---|---|---|
 | **Member 1: Adil Siddiqui** (`AdilSiddiqui8009`) | `number.py`, `filesize.py`, `time.py` | • Linux/macOS setup documentation.<br>• 7 functions tested (67 unit tests).<br>• Module contract tests for 3 modules (24 tests).<br>• 6 CSV datasets in `tests_assignment/data/` (66 rows).<br>• `test_data_driven_csv.py` test runner.<br>• Base `Test_Cases.xlsx` (Sheets: Test Cases, Test Data, Summary).<br>• Found Defect 1 (`ordinal(-1)`). |
-| **Member 2: Ibadat Ali** (`i.k.jamlera820@gmail.com`) | `lists.py`, `number.py` (extended), `time.py` (extended) | • Native Windows 10/11 PowerShell environment verification.<br>• Recorded setup demonstration video (`docs/setup_video.mp4`, 16.6 MB).<br>• 4 functions tested: `natural_list`, `clamp`, `intword`, `naturaldate` (34 unit tests).<br>• Module contract tests for `lists`, `number`, `time` (15 tests).<br>• 4 CSV datasets in `tests_assignment/data/` (25 rows).<br>• `tests_assignment/test_data_driven_m2.py` test runner.<br>• Excel workbook updates (`M2_TestCases`, `M2_TestData`, `M2_Summary`).<br>• Added M2 markers, module ordering (`lists`), and suites in `run_tests.py`.<br>• Found Defect 2 (`intword(999_999)` premature rollover). |
+| **Member 2: Ibadat Ali** (`i.k.jamlera820@gmail.com`) | `lists.py`, `number.py` (extended), `time.py` (extended) | • Native Windows 10/11 PowerShell environment verification.<br>• Recorded setup demonstration video (`docs/setup_video.mp4`, 16.6 MB).<br>• 4 functions tested: `natural_list`, `clamp`, `intword`, `naturaldate` (24 functions $\rightarrow$ 41 runs, 5–6 per class).<br>• Module contract tests for `lists`, `number`, `time` (15 functions $\rightarrow$ 21 runs). Total 39 unit functions (62 runs) + 25 CSV data-driven runs = 87 test runs.<br>• Single tests placed first; clean parametrized data tables at the end.<br>• 4 CSV datasets in `tests_assignment/data/` (25 rows).<br>• `tests_assignment/test_data_driven_m2.py` test runner.<br>• Excel workbook updates (`M2_TestCases`, `M2_TestData`, `M2_Summary`).<br>• Added M2 markers, module ordering (`lists`), and suites in `run_tests.py`.<br>• Found Defect 2 (`intword(999_999)` premature rollover). |
 
 All contributions are tracked via distinct Git commit history on branch `test/m2-unit-tests`.
