@@ -7,9 +7,11 @@ Suites
   smoke             fastest happy-path tests, one per function
   regression        everything (serial, ordered)
   ecp | boundary | negative | datadriven | module_level     one technique/group
-  number | filesize | time                                    one module
+  number | filesize | time | lists                           one module
+  clamp | intword | naturaldate                             individual function suite
+  m2                all tests authored by Member 2 (Ibadat Ali)
   parallel          everything, all CPU cores (xdist `load`)
-  parallel-modules  3 workers, one per module suite (xdist `loadgroup`)
+  parallel-modules  4 workers, one per module suite (xdist `loadgroup`)
   ordered           everything, serial, verbose: shows the enforced group order
   full              parallel + JUnit XML + HTML report in reports/
 """
@@ -27,11 +29,23 @@ SUITES = {
     "number": ["-m", "number"],
     "filesize": ["-m", "filesize"],
     "time": ["-m", "time"],
+    "lists": ["-m", "lists"],
+    "clamp": ["-m", "clamp"],
+    "intword": ["-m", "intword"],
+    "naturaldate": ["-m", "naturaldate"],
+    "m2": ["-m", "m2"],
     "parallel": ["-n", "auto", "--dist", "load"],
-    "parallel-modules": ["-n", "3", "--dist", "loadgroup"],
+    "parallel-modules": ["-n", "4", "--dist", "loadgroup"],
     "ordered": ["-p", "no:xdist", "-v"],
-    "full": ["-n", "auto", "--dist", "load", "--junitxml=reports/junit.xml",
-             "--html=reports/report.html", "--self-contained-html"],
+    "full": [
+        "-n",
+        "auto",
+        "--dist",
+        "load",
+        "--junitxml=reports/junit.xml",
+        "--html=reports/report.html",
+        "--self-contained-html",
+    ],
 }
 
 
