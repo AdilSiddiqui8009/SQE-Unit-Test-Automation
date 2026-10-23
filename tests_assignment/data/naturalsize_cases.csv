@@ -1,0 +1,14 @@
+id,value,binary,gnu,format,expected,technique
+S-01,0,,,,0 Bytes,BVA
+S-02,1,,,,1 Byte,BVA
+S-03,999,,,,999 Bytes,BVA
+S-04,1000,,,,1.0 kB,BVA
+S-05,999999,,,,1.0 MB,BVA
+S-06,1023,true,,,1023 Bytes,BVA
+S-07,1024,true,,,1.0 KiB,BVA
+S-08,1048576,true,,,1.0 MiB,BVA
+S-09,-1000,,,,-1.0 kB,ECP
+S-10,3000,,true,%.3f,2.930K,Option
+S-11,300,,true,,300B,Option
+S-12,1536,true,,%.0f,2 KiB,Option
+S-13,1e30,,,,1.0 QB,ECP

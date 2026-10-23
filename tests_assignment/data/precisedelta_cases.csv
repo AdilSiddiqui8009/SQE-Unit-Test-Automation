@@ -1,0 +1,11 @@
+id,seconds,minimum_unit,format,expected,technique
+P-01,0,,,0 seconds,BVA
+P-02,59,,,59 seconds,BVA
+P-03,60,,,1 minute,BVA
+P-04,61,,,1 minute and 1 second,BVA
+P-05,3600,,,1 hour,BVA
+P-06,90,,,1 minute and 30 seconds,ECP
+P-07,3660,hours,,1.02 hours,Option
+P-08,1.5,seconds,%0.1f,1.5 seconds,Option
+P-09,34560000,,,"1 year, 1 month and 4 days",ECP
+P-10,176433.123,,,"2 days, 1 hour and 33.12 seconds",ECP

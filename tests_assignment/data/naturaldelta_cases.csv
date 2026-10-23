@@ -1,0 +1,13 @@
+id,seconds,months,minimum_unit,expected,technique
+D-01,0,,,a moment,BVA
+D-02,1,,,a second,BVA
+D-03,59,,,59 seconds,BVA
+D-04,60,,,a minute,BVA
+D-05,90,,,2 minutes,BVA
+D-06,3599,,,an hour,BVA
+D-07,86399,,,a day,BVA
+D-08,172800,,,2 days,BVA
+D-09,31536000,,,a year,BVA
+D-10,3888000,false,,45 days,Option
+D-11,0.5,,milliseconds,500 milliseconds,Option
+D-12,-60,,,a minute,ECP

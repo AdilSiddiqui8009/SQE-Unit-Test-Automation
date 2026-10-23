@@ -1,0 +1,10 @@
+id,value,ndigits,expected,technique
+I-01,0,,0,BVA
+I-02,999,,999,BVA
+I-03,1000,,"1,000",BVA
+I-04,-1000,,"-1,000",ECP
+I-05,1234567,,"1,234,567",ECP
+I-06,1234.5,,"1,234.5",ECP
+I-07,1234.5678,2,"1,234.57",Option
+I-08,abc,,abc,Negative
+I-09,inf,,+Inf,Negative

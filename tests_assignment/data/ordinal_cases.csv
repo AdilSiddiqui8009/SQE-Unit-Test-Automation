@@ -1,0 +1,16 @@
+id,value,expected,technique
+O-01,1,1st,ECP
+O-02,2,2nd,ECP
+O-03,3,3rd,ECP
+O-04,4,4th,ECP
+O-05,11,11th,BVA
+O-06,12,12th,BVA
+O-07,13,13th,BVA
+O-08,21,21st,ECP
+O-09,101,101st,ECP
+O-10,111,111th,BVA
+O-11,0,0th,BVA
+O-12,abc,abc,Negative
+O-13,None,None,Negative
+O-14,inf,+Inf,Negative
+O-15,nan,NaN,Negative
