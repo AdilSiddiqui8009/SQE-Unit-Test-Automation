@@ -79,11 +79,7 @@ class TestNaturalsize:
         assert naturalsize(value, binary, gnu, fmt) == expected
 
     @pytest.mark.negative
-    def test_naturalsize_non_numeric_string_raises_valueerror(self):
-        with pytest.raises(ValueError):
-            naturalsize("abc")
-
-    @pytest.mark.negative
-    def test_naturalsize_none_raises_typeerror(self):
-        with pytest.raises(TypeError):
-            naturalsize(None)
+    @pytest.mark.parametrize("bad_value, error", [("abc", ValueError), (None, TypeError)])
+    def test_naturalsize_invalid_input_raises(self, bad_value, error):
+        with pytest.raises(error):
+            naturalsize(bad_value)

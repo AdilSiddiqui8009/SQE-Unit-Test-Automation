@@ -26,33 +26,19 @@ class TestNaturaldelta:
     @pytest.mark.boundary
     @pytest.mark.parametrize(
         "seconds, expected",
-        [(0, "a moment"), (0.5, "a moment"), (1, "a second"), (2, "2 seconds")],
+        [(0, "a moment"), (0.5, "a moment"), (1, "a second"), (2, "2 seconds"),
+         (59, "59 seconds"), (60, "a minute"), (89, "a minute"), (90, "2 minutes")],
     )
-    def test_naturaldelta_moment_second_boundary(self, seconds, expected):
+    def test_naturaldelta_second_and_minute_boundaries(self, seconds, expected):
         assert naturaldelta(seconds) == expected
 
     @pytest.mark.boundary
     @pytest.mark.parametrize(
         "seconds, expected",
-        [(59, "59 seconds"), (60, "a minute"), (89, "a minute"), (90, "2 minutes")],
+        [(3540, "59 minutes"), (3599, "an hour"), (3600, "an hour"), (5400, "2 hours"),
+         (43_200, "12 hours"), (86_399, "a day"), (86_400, "a day"), (172_800, "2 days")],
     )
-    def test_naturaldelta_seconds_to_minutes_boundary(self, seconds, expected):
-        assert naturaldelta(seconds) == expected
-
-    @pytest.mark.boundary
-    @pytest.mark.parametrize(
-        "seconds, expected",
-        [(3540, "59 minutes"), (3599, "an hour"), (3600, "an hour"), (5400, "2 hours")],
-    )
-    def test_naturaldelta_minutes_to_hours_boundary(self, seconds, expected):
-        assert naturaldelta(seconds) == expected
-
-    @pytest.mark.boundary
-    @pytest.mark.parametrize(
-        "seconds, expected",
-        [(43_200, "12 hours"), (86_399, "a day"), (86_400, "a day"), (172_800, "2 days")],
-    )
-    def test_naturaldelta_hours_to_days_boundary(self, seconds, expected):
+    def test_naturaldelta_hour_and_day_boundaries(self, seconds, expected):
         assert naturaldelta(seconds) == expected
 
     @pytest.mark.boundary
