@@ -1,7 +1,7 @@
 # Test Design Notes (Task 2) - ECP and BVA
 
 **System under test:** `humanize` (vendored in `humanize/`).
-**Author:** AdilSiddiqui8009 (add your group members' sections below in the same format).
+**Authors:** Adil Siddiqui (Member 1) & Ibadat Ali (Member 2 / m2).
 
 Techniques applied: **Equivalence Class Partitioning (ECP)**, **Boundary Value Analysis (BVA)**,
 plus **error guessing** (odd types, `None`, `inf`, `nan`) and **decision/option coverage** for
@@ -130,6 +130,87 @@ units, sign-insensitivity, timedelta/seconds equivalence, monotonic ordering of 
 
 ---------------------------------------------------------------------------------------
 
+## Module 4 - `humanize/lists.py` (Member 2: Ibadat Ali)
+
+Function under test: `natural_list(items)`.
+
+### 4.1 `natural_list(items)`
+Rule: converts an iterable into a natural language list with commas and 'and'. Empty iterable returns `""`, single item returns the stringified item, two items separated by `' and '`, three or more separated by `', '` and `' and '`.
+
+| Technique | Class / boundary | Input -> Expected |
+|---|---|---|
+| BVA | empty collection (len = 0) | `[]` -> `""` |
+| BVA | single item (len = 1) | `["apple"]` -> `"apple"` |
+| BVA | two items (len = 2) | `["apple", "banana"]` -> `"apple and banana"` |
+| BVA | three items (len = 3) | `["apple", "banana", "cherry"]` -> `"apple, banana and cherry"` |
+| ECP | heterogeneous iterable / stringification | `[1, 2, 3]` -> `"1, 2 and 3"` |
+| ECP | tuple polymorphism | `("x", "y")` -> `"x and y"` |
+| ECP (invalid) | non-iterable (None) | `None` -> raises `TypeError` |
+
+### 4.2 Module-level contract tests (lists.py)
+Public API exposure (`__all__ = ["natural_list"]`), top-level package re-export (`humanize.natural_list is humanize.lists.natural_list`), string return type guarantee across inputs, caller input immutability (passing list does not mutate it), and generator comprehension support.
+
+---------------------------------------------------------------------------------------
+
+## Module 5 - `humanize/number.py` (Extended - Member 2: Ibadat Ali)
+
+Functions under test: `clamp`, `intword`.
+
+### 5.1 `clamp(value, format="{:}", floor=None, ceil=None, floor_token="<", ceil_token=">")`
+Rule: clamps value between floor and ceil. If below floor, returns `floor_token + formatted floor`. If above ceil, returns `ceil_token + formatted ceil`. If inside, returns formatted value.
+
+| Technique | Class / boundary | Input -> Expected |
+|---|---|---|
+| BVA | exact lower boundary (Floor) | `clamp(10, floor=10, ceil=100)` -> `"10"` |
+| BVA | just below lower boundary (Floor - ε) | `clamp(9.99, floor=10, ceil=100)` -> `"<10"` |
+| BVA | exact upper boundary (Ceiling) | `clamp(100, floor=10, ceil=100)` -> `"100"` |
+| BVA | just above upper boundary (Ceiling + ε) | `clamp(100.01, floor=10, ceil=100)` -> `">100"` |
+| BVA | custom boundary tokens | `clamp(5, floor=10, floor_token="under ")` -> `"under 10"` |
+| ECP | interior valid partition | `clamp(50, floor=10, ceil=100)` -> `"50"` |
+| ECP | None passthrough | `clamp(None)` -> `None` |
+| ECP (invalid) | invalid format parameter | `clamp(50, format=123)` -> raises `ValueError` |
+
+### 5.2 `intword(value, format="%.1f")`
+Rule: converts large integers into friendly text (starting at 1,000 thousand up to googol).
+
+| Technique | Class / boundary | Input -> Expected |
+|---|---|---|
+| BVA | below thousand boundary | 999 -> `"999"` |
+| BVA | exact thousand boundary | 1_000 -> `"1.0 thousand"` |
+| BVA | million scale transition | 1_000_000 -> `"1.0 million"` |
+| BVA | billion scale transition | 1_000_000_000 -> `"1.0 billion"` |
+| BVA | trillion scale transition | 1_000_000_000_000 -> `"1.0 trillion"` |
+| BVA | negative scale boundary | -1_000 -> `"-1.0 thousand"` |
+| ECP | interior fractional partition | (1_250_000, "%.2f") -> `"1.25 million"` |
+| ECP (invalid) | non-numeric string fallback | `"not-a-number"` -> `"not-a-number"` |
+
+### 5.3 Module-level contract tests (number.py - extended)
+Package re-export of `clamp` and `intword` at top-level `humanize`, inter-function integration (`clamp(1, format=intword, floor=1e6)` -> `"under 1.0 million"`), non-finite handling (`nan`, `inf`), and string return-type guarantees.
+
+---------------------------------------------------------------------------------------
+
+## Module 6 - `humanize/time.py` (Extended - Member 2: Ibadat Ali)
+
+Function under test: `naturaldate(value)`.
+
+### 6.1 `naturaldate(value)`
+Rule: returns natural relative day within 152 days (`today`, `yesterday`, `tomorrow`, or `%b %d`), and appends year `%b %d %Y` beyond 153 days (~5 months).
+
+| Technique | Class / boundary | Input -> Expected |
+|---|---|---|
+| BVA | exact day boundary: Today (Δ = 0) | `today` -> `"today"` |
+| BVA | exact day boundary: Yesterday (Δ = -1) | `today - 1 day` -> `"yesterday"` |
+| BVA | exact day boundary: Tomorrow (Δ = +1) | `today + 1 day` -> `"tomorrow"` |
+| BVA | 5-month threshold: within 150 days | `today + 60 days` -> formatted `%b %d` (no year) |
+| BVA | 5-month threshold: beyond 153 days | `today + 180 days` -> formatted `%b %d %Y` (with year) |
+| ECP | datetime vs date input equivalence | `datetime(today.year, today.month, today.day)` -> `"today"` |
+| ECP (invalid) | non-date input fallback | `"not-a-date"` -> `"not-a-date"`, `None` -> `"None"` |
+
+### 6.2 Module-level contract tests (time.py - extended)
+Top-level re-export of `naturaldate`, datetime vs date contract consistency, timezone-aware datetime handling, return-type guarantee (`str`), and leap-year boundary handling.
+
+---------------------------------------------------------------------------------------
+
 ## Test groups (used by Task 4)
 | Marker | Meaning |
 |---|---|
@@ -140,6 +221,11 @@ units, sign-insensitivity, timedelta/seconds equivalence, monotonic ordering of 
 | `datadriven` | tests fed from CSV files (Task 3) |
 | `number`, `filesize`, `time` | module suites |
 | `module_level` | module/class-level tests |
+| `m2` | test suite authored by Member 2 (Ibadat Ali) |
+| `lists` | tests for humanize.lists module |
+| `clamp` | tests for number.clamp function |
+| `intword` | tests for number.intword function |
+| `naturaldate` | tests for time.naturaldate function |
 
 ## Observations / possible defects found during design
 1. `ordinal(-1)` returns `-1th` - negative numbers use the wrong suffix (suffix chosen from
@@ -149,3 +235,6 @@ units, sign-insensitivity, timedelta/seconds equivalence, monotonic ordering of 
    the boundary tests encode intended behaviour, not a bug.
 3. Invalid `minimum_unit` raises a bare `KeyError('BOGUS')` rather than a descriptive
    `ValueError` - low severity usability issue.
+4. `intword(999_999)` returns `'1.0 million'` - with format `'%.1f'`, 999,999 prematurely
+   rounds up and claims to be a million before reaching 1,000,000. Captured as an `xfail`
+   test so the finding is on record with code proof.
