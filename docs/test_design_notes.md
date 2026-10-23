@@ -57,7 +57,7 @@ Rule: suffix is `st/nd/rd/th` by last digit, except 11/12/13 (and 111/112/113...
 | Error guessing | nan | nan -> `NaN` |
 
 ### 1.4 Module-level tests (number.py)
-Public API exposure (`__all__`/package imports), every function returns `str`,
+Public API exposure (`humanize.__all__` and package re-exports; `number.py`/`filesize.py` define no `__all__` of their own), every function returns `str`,
 "junk in -> junk out" contract shared by all functions, function composition
 (`intcomma(int(...))` round-trip), and non-finite handling consistency.
 
