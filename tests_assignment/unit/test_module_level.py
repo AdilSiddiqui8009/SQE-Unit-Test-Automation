@@ -22,6 +22,7 @@ class TestNumberModule:
     FUNCS = (number.ordinal, number.intcomma, number.apnumber)
 
     @pytest.mark.smoke
+    @pytest.mark.case_order(20)
     def test_package_reexports_are_the_module_functions(self):
         assert humanize.ordinal is number.ordinal
         assert humanize.intcomma is number.intcomma
@@ -67,6 +68,7 @@ class TestNumberModule:
 @pytest.mark.filesize
 class TestFilesizeModule:
     @pytest.mark.smoke
+    @pytest.mark.case_order(20)
     def test_package_reexport_is_the_module_function(self):
         assert humanize.naturalsize is filesize.naturalsize
 
@@ -107,6 +109,7 @@ class TestFilesizeModule:
 @pytest.mark.time
 class TestTimeModule:
     @pytest.mark.smoke
+    @pytest.mark.case_order(20)
     def test_package_reexports_are_the_module_functions(self):
         assert humanize.naturaldelta is htime.naturaldelta
         assert humanize.naturalday is htime.naturalday

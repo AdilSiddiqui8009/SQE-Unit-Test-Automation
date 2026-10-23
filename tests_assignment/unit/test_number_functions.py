@@ -14,6 +14,7 @@ pytestmark = pytest.mark.number
 # --------------------------------------------------------------------------- ordinal
 class TestOrdinal:
     @pytest.mark.smoke
+    @pytest.mark.case_order(10)
     def test_ordinal_basic_first_second_third(self):
         assert [ordinal(n) for n in (1, 2, 3)] == ["1st", "2nd", "3rd"]
 
@@ -66,6 +67,7 @@ class TestOrdinal:
         assert ordinal(1, gender="unknown") == "1st"
 
     @pytest.mark.negative
+    @pytest.mark.case_order(99)
     @pytest.mark.xfail(reason="Suspected defect: negative numbers get 'th' (-1 -> '-1th')",
                        strict=False)
     def test_ordinal_negative_one_should_be_1st(self):
@@ -75,6 +77,7 @@ class TestOrdinal:
 # ------------------------------------------------------------------------- intcomma
 class TestIntcomma:
     @pytest.mark.smoke
+    @pytest.mark.case_order(10)
     def test_intcomma_basic(self):
         assert intcomma(1234567) == "1,234,567"
 
@@ -132,6 +135,7 @@ class TestIntcomma:
 # -------------------------------------------------------------------------- apnumber
 class TestApnumber:
     @pytest.mark.smoke
+    @pytest.mark.case_order(10)
     def test_apnumber_basic(self):
         assert apnumber(1) == "one"
 

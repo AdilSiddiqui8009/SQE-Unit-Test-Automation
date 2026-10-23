@@ -11,6 +11,7 @@ pytestmark = pytest.mark.filesize
 
 class TestNaturalsize:
     @pytest.mark.smoke
+    @pytest.mark.case_order(10)
     def test_naturalsize_basic_decimal(self):
         assert naturalsize(3_000_000) == "3.0 MB"
 

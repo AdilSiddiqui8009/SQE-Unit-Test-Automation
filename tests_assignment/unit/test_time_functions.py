@@ -19,6 +19,7 @@ FROZEN_TODAY = "2026-06-15"
 # ------------------------------------------------------------------------ naturaldelta
 class TestNaturaldelta:
     @pytest.mark.smoke
+    @pytest.mark.case_order(10)
     def test_naturaldelta_basic(self):
         assert naturaldelta(TD(seconds=90)) == "2 minutes"
 
@@ -98,6 +99,7 @@ class TestNaturalday:
     TODAY = dt.date(2026, 6, 15)
 
     @pytest.mark.smoke
+    @pytest.mark.case_order(10)
     def test_naturalday_today(self):
         assert naturalday(self.TODAY) == "today"
 
@@ -133,6 +135,7 @@ class TestNaturalday:
 # ----------------------------------------------------------------------- precisedelta
 class TestPrecisedelta:
     @pytest.mark.smoke
+    @pytest.mark.case_order(10)
     def test_precisedelta_basic(self):
         assert precisedelta(TD(seconds=90)) == "1 minute and 30 seconds"
 

@@ -3,8 +3,7 @@
 
 # Test tooling
 pytest>=8
-pytest-xdist>=3        # parallel execution (-n)
-pytest-order>=1.2      # execution order of groups/tests
+pytest-xdist>=3        # parallel execution (-n)  + xdist_group scheduling
 pytest-html>=4         # HTML report
 pytest-benchmark       # needed by upstream tests/test_benchmarks.py
 freezegun              # needed by upstream tests/test_time.py
