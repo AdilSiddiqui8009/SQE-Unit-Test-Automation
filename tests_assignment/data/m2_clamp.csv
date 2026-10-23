@@ -1,0 +1,8 @@
+id,value,floor,ceil,floor_token,ceil_token,format,expected,technique
+C-01,50,10,100,,,,50,ECP
+C-02,10,10,100,,,,10,BVA
+C-03,9,10,100,,,,<10,BVA
+C-04,100,10,100,,,,100,BVA
+C-05,101,10,100,,,,>100,BVA
+C-06,5,10,100,UNDER,,,UNDER10,Option
+C-07,12.3456,0,100,,,{:.2f},12.35,Option

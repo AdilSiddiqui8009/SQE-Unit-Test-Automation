@@ -6,7 +6,7 @@
    definition order:
 
        group  : smoke -> datadriven -> module_level -> ecp -> boundary -> negative
-       module : number -> filesize -> time
+       module : number -> filesize -> time -> lists
 
    A test with several group markers belongs to the FIRST group in the list above.
    Ordering is exact for serial runs (`-p no:xdist` or `-n0`). Under `-n N` the
@@ -14,13 +14,13 @@
 
 2. PARALLEL EXECUTION (pytest-xdist)
    Every test is tagged `xdist_group(<module>)`. Use `-n auto --dist load` for
-   maximum parallelism, or `-n 3 --dist loadgroup` to run the number / filesize /
-   time suites side by side, one worker per suite.
+   maximum parallelism, or `-n 4 --dist loadgroup` to run the number / filesize /
+   time / lists suites side by side, one worker per suite.
 """
 import pytest
 
 GROUP_ORDER = ["smoke", "datadriven", "module_level", "ecp", "boundary", "negative"]
-MODULE_ORDER = ["number", "filesize", "time"]
+MODULE_ORDER = ["number", "filesize", "time", "lists"]
 DEFAULT_CASE_ORDER = 50
 
 

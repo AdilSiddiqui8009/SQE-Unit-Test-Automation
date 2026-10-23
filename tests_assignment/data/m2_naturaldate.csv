@@ -1,0 +1,7 @@
+id,reference_date,target_date,expected,technique
+D-01,2026-06-15,2026-06-15,today,BVA
+D-02,2026-06-15,2026-06-14,yesterday,BVA
+D-03,2026-06-15,2026-06-16,tomorrow,BVA
+D-04,2026-06-15,2026-04-10,Apr 10,ECP
+D-05,2026-06-15,2025-01-01,Jan 01 2025,BVA
+D-06,2026-06-15,2027-02-20,Feb 20 2027,ECP

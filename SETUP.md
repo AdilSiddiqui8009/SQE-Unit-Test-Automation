@@ -37,6 +37,31 @@ python -c "import humanize; print(humanize.naturalsize(3000000), humanize.ordina
 # 3.0 MB 3rd
 ```
 
+## Windows Developer Setup (Verified by Member 2 - Ibadat Ali)
+
+For Windows (PowerShell / Windows Terminal):
+```powershell
+# 1. Clone repository and navigate inside
+cd SQE-Unit-Test-Automation
+
+# 2. Create virtual environment with native Python
+python -m venv .venv
+
+# 3. Activate virtual environment
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\.venv\Scripts\Activate.ps1
+
+# 4. Install test requirements and editable package
+pip install -r requirements.txt
+
+# 5. Quick smoke test verification
+python -c "import humanize; print(humanize.naturalsize(3000000), humanize.ordinal(3))"
+# Output: 3.0 MB 3rd
+
+# 6. Verify unit tests run
+pytest tests_assignment/unit/ -q
+```
+
 ## Troubleshooting seen during our own setup
 | Symptom | Cause | Fix |
 |---|---|---|

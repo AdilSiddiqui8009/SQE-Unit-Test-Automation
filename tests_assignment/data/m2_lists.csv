@@ -1,0 +1,7 @@
+id,items,expected,technique
+L-01,,,BVA
+L-02,apples,apples,BVA
+L-03,apples|oranges,apples and oranges,BVA
+L-04,apples|peaches|grapes,"apples, peaches and grapes",ECP
+L-05,1|2|3,"1, 2 and 3",ECP
+L-06,red|green|blue|yellow,"red, green, blue and yellow",ECP
