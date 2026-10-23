@@ -1,0 +1,7 @@
+id,value,format,expected,technique
+W-01,100,,100,ECP
+W-02,1000,,1.0 thousand,BVA
+W-03,1000000,,1.0 million,BVA
+W-04,1000000000,,1.0 billion,BVA
+W-05,-1000000,,-1.0 million,ECP
+W-06,1200000,%.2f,1.20 million,Option
