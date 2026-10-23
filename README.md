@@ -11,6 +11,10 @@ System under test: **[humanize](https://github.com/python-humanize/humanize)** (
 | 4 | Parallel / suites / groups / parametrization / order | `pytest.ini`, `conftest.py`, `run_tests.py` |
 | - | Summary report | `docs/summary_report.md` |
 
+## Team Contributors
+- **Member 1: Adil Siddiqui** — Linux/macOS Environment Setup, Task 2: Number, Filesize, Time
+- **Member 2: Ibadat Ali** — Windows Environment Setup & Verification, Task 2: Lists, Number Extended, Time Extended
+
 ## Quick start
 ```bash
 python3 -m venv .venv && source .venv/bin/activate     # Windows: .venv\Scripts\activate
